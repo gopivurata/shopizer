@@ -11,7 +11,7 @@ pipeline {
         stage('merge') {
             steps {
                      git checkout relese
-                     git merge develop --no-ff
+                     git merge origin/develop --no-ff
             }
        }
        stage('build') {
