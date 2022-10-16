@@ -2,20 +2,22 @@ pipeline {
     agent { label 'NODE-1' }
     triggers { cron('0 5 * * *') }
     stages {
+        
+        stage('merge') {
+            steps {
+                sh '''git clone https://github.com/gopivurata/shopizer.git
+                     cd shopizer           
+                     git checkout relese
+                     git merge origin/develop --no-ff
+                     git add .
+                     git commit -m "merge develop branch"
+                     git push''''
+            }
+        }
         stage('vcs') {
            steps {
                git branch: 'relese',
                url: 'https://github.com/gopivurata/shopizer.git'
-            }
-        }
-        stage('merge') {
-            steps {
-                sh 'git clone https://github.com/gopivurata/shopizer.git'
-                sh 'git checkout relese'
-                sh 'git merge develop --no-ff'
-                sh 'git add .'
-                sh 'git commit -m "merge develop branch"'
-                sh 'git push'
             }
         }
         stage('build') {
