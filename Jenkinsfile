@@ -10,11 +10,11 @@ pipeline {
         }
         stage('merge') {
             steps {
-                sh '''git checkout relese
-                git merge develop --no-ff
-                git add .
-                git commit -m "merge develop branch"
-                git push'''
+                sh 'git checkout relese'
+                sh 'git merge develop --no-ff'
+                sh 'git add .'
+                sh 'git commit -m "merge develop branch"'
+                sh 'git push'
             }
         }
         stage('build') {
