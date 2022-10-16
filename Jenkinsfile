@@ -11,7 +11,7 @@ pipeline {
                      git merge origin/develop --no-ff
                      git add .
                      git commit -m "merge develop branch"
-                     git push''''
+                     git push -u origin relese'''
             }
         }
         stage('vcs') {
