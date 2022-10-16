@@ -1,5 +1,6 @@
 pipeline {
     agent { label 'NODE-1' }
+     triggers { cron('0 5 * * *') }
     stages {
         stage('vcs') {
            steps {
@@ -12,4 +13,21 @@ pipeline {
                      git checkout relese
                      git merge develop --no-ff
             }
+       }
+       stage('build') {
+            steps {
+                sh '/usr/share/maven/bin/mvn package'
+            }
         }
+        stage('archive results') {
+            steps {
+                junit '**/target/surefire-reports/*.xml'
+            }
+        }
+        stage('artifacts') {
+            steps {
+                archiveArtifacts artifacts: '**/target/*.jar'
+            }
+        }
+    }
+}
