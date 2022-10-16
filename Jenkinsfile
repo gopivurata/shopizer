@@ -10,6 +10,7 @@ pipeline {
         }
         stage('merge') {
             steps {
+                sh 'git clone https://github.com/gopivurata/shopizer.git'
                 sh 'git checkout relese'
                 sh 'git merge develop --no-ff'
                 sh 'git add .'
