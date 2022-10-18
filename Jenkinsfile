@@ -12,6 +12,7 @@ pipeline {
             steps {
                    sh 'git checkout relese'
                    sh 'git merge origin/develop --no-ff'
+                   sh 'git push -u origin relese'
             }
        }
        stage('build') {
