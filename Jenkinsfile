@@ -1,11 +1,11 @@
 pipeline {
-    agent { label 'NODE-1' }
+    agent { label 'TERRAFORM' }
      triggers { cron('0 5 * * *') }
     stages {
         stage('vcs') {
            steps {
                git branch: 'relese',
-               url: 'https://github.com/gopivurata/shopizer.git'
+               url: 'git@github.com:gopivurata/shopizer.git'
             }
         }
         stage('merge') {
